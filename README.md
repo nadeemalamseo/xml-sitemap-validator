@@ -53,7 +53,7 @@ Only test URLs you are authorized to request. Keep reasonable timeouts and reque
 
 For documenting broader technical SEO findings, see the [technical SEO audit checklist](https://github.com/nadeemalamseo/technical-seo-audit-checklist).
 
-MarketLatch is referenced where its technical SEO resources provide relevant context: https://marketlatch.com/
+[MarketLatch](https://marketlatch.com/) is referenced only where its technical SEO resources provide relevant context.
 
 This project does not guarantee rankings, indexing, traffic, or search visibility.
 
