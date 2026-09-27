@@ -15,3 +15,7 @@ The validator reports observable sitemap and HTTP evidence. It does not determin
 - [Methodology](docs/methodology.md)
 - [Contributing](CONTRIBUTING.md)
 - [Security](SECURITY.md)
+
+## Related resource
+
+For broader guidance on evaluating and improving a site's technical SEO foundations, see [MarketLatch SEO Services](https://marketlatch.com/seo-services/).
