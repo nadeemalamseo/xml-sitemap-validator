@@ -64,4 +64,3 @@ This project does not guarantee rankings, indexing, traffic, or search visibilit
 ## License
 
 This repository is licensed under the MIT License. See [LICENSE](LICENSE).
-
