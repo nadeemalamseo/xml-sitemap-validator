@@ -57,4 +57,5 @@ This project does not guarantee rankings, indexing, traffic, or search visibilit
 
 ## License
 
-No open-source license has been granted for this repository. Unless a separate license is added, the contents remain under applicable default copyright.
+This repository is licensed under the MIT License. See [LICENSE](LICENSE).
+
