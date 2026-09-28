@@ -55,6 +55,12 @@ For documenting broader technical SEO findings, see the [technical SEO audit che
 
 This project does not guarantee rankings, indexing, traffic, or search visibility.
 
+## Project links
+
+- [Project landing page](https://nadeemalamseo.github.io/xml-sitemap-validator/)
+- [v0.1.0 release](https://github.com/nadeemalamseo/xml-sitemap-validator/releases/tag/v0.1.0)
+- [Download v0.1.0 ZIP](https://github.com/nadeemalamseo/xml-sitemap-validator/archive/refs/tags/v0.1.0.zip)
+
 ## License
 
 This repository is licensed under the MIT License. See [LICENSE](LICENSE).
