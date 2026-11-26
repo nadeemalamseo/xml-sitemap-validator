@@ -195,7 +195,7 @@ class NetworkSafetyTests(unittest.TestCase):
         response = response_mock(chunks=[b"a" * 8, b"b" * 8])
         session.get.return_value = response
 
-        with self.assertRaisesRegex(ValueError, "16-byte safety limit"):
+        with self.assertRaisesRegex(ValueError, "10-byte safety limit"):
             fetch_text("https://example.com/sitemap.xml", max_bytes=10)
         response.close.assert_called_once()
         session.close.assert_called_once()
