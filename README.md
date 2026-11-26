@@ -4,7 +4,8 @@ A practical XML sitemap validator for URL structure, HTTP responses, canonical c
 
 ## What it checks
 
-- XML parsing for `urlset` and `sitemapindex`
+- Hardened XML parsing for `urlset` and `sitemapindex` (DTD/entity declarations are rejected)
+- Direct-child `<loc>` validation, without mistaking nested image-extension locations for page URLs
 - Strict validation that every `<loc>` is an absolute HTTP(S) URL
 - Duplicate `<loc>` values
 - Optional, bounded HTTP status, redirect, final URL, and content-type checks
@@ -43,11 +44,11 @@ python xml_sitemap_validator.py ./sitemap.xml --no-http
 
 ## Resource limits
 
-The default limits are 50 MiB for the sitemap document, 50,000 `<loc>` entries, and 100 HTTP checks per run. Remote downloads are streamed and capped; HTTP response bodies are not downloaded unless canonical inspection is requested, in which case inspection is capped at 2 MiB per page. Use `--no-http` when you only need to validate the XML and URL structure.
+The default limits are 50 MiB for the sitemap document, 50,000 `<loc>` entries, 100 HTTP checks per run, and 10 redirect hops per request. Remote downloads and local file reads are streamed and capped. HTTP response bodies are not downloaded for status-only checks; canonical inspection reads at most 2 MiB per page. Requests' timeout is a connection/read inactivity timeout, not a hard total wall-clock deadline. Use `--no-http` when you only need to validate the XML and URL structure.
 
 The sitemap protocol allows up to 50,000 URLs and an uncompressed sitemap file size of 50 MiB. This tool applies those limits by default. A smaller custom limit can be supplied for cautious local use.
 
-A sitemap index is recognized and its child `<loc>` entries are validated, but child sitemaps are not recursively downloaded in this release. This keeps network scope predictable.
+A sitemap index is recognized and its child `<loc>` entries are validated, but child sitemaps are not recursively downloaded in this release. This keeps network scope predictable. The parser rejects DTD/entity declarations and requires each direct `<url>` or `<sitemap>` entry to contain exactly one direct `<loc>`.
 
 ## Exit codes
 
@@ -67,7 +68,7 @@ See [docs/methodology.md](docs/methodology.md).
 
 ## Responsible use
 
-Only test URLs you are authorized to request. Keep reasonable timeouts and request volumes. The default HTTP-check budget is capped at 100 URLs per run.
+Only test URLs you are authorized to request. Keep reasonable timeouts and request volumes. The default HTTP-check budget is capped at 100 URLs per run. This is a local CLI, not a public URL-fetching service. See [SECURITY.md](SECURITY.md) before embedding it in a web application.
 
 ## Related resources
 
@@ -78,8 +79,10 @@ This project does not guarantee rankings, indexing, traffic, or search visibilit
 ## Project links
 
 - [Project landing page](https://nadeemalamseo.github.io/xml-sitemap-validator/)
-- [v0.1.0 release](https://github.com/nadeemalamseo/xml-sitemap-validator/releases/tag/v0.1.0)
-- [Download v0.1.0 ZIP](https://github.com/nadeemalamseo/xml-sitemap-validator/archive/refs/tags/v0.1.0.zip)
+- [Download latest source ZIP from main](https://github.com/nadeemalamseo/xml-sitemap-validator/archive/refs/heads/main.zip)
+- [Existing v0.1.0 release (historical snapshot)](https://github.com/nadeemalamseo/xml-sitemap-validator/releases/tag/v0.1.0)
+
+The v0.1.0 release is an earlier snapshot and does not include the current XML hardening and network-safety improvements on the main branch.
 
 ## License
 
