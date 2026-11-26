@@ -2,7 +2,11 @@
 
 ## XML validation
 
-The parser requires well-formed XML and recognizes two root types: `urlset` and `sitemapindex`. It extracts `loc` values and checks whether they are valid HTTP(S) URLs.
+The parser requires well-formed XML and recognizes two root types: `urlset` and `sitemapindex`. It extracts `loc` values and checks that each is a fully qualified absolute HTTP(S) URL with a host. Relative and protocol-relative values are rejected rather than resolved against the sitemap URL.
+
+## Resource limits
+
+Remote sitemap downloads are streamed and capped at 50 MiB by default. Local files are checked against the same byte limit before reading. Parsing is limited to 50,000 `loc` entries by default, consistent with the sitemap protocol's per-file limits. Both limits can be lowered using CLI arguments.
 
 ## Duplicate detection
 
@@ -10,13 +14,13 @@ Duplicate `loc` strings are reported. The validator does not assume that two dif
 
 ## HTTP checks
 
-For each valid URL in a `urlset`, optional checks record HTTP status, final URL after redirects, redirect count, content type, and request errors.
+For a `urlset`, optional checks record HTTP status, final URL after redirects, redirect count, content type, and request errors. The default request budget is 100 URLs per run. Requests are streamed and closed; response bodies are not downloaded for status-only checks.
 
 These observations come from the environment making the request and can vary because of CDN, WAF, authentication, geolocation, rate limiting, or server state.
 
 ## Canonical checks
 
-With `--check-canonical`, HTML responses are inspected for a canonical link. The comparison is between the resolved canonical URL and the final URL after redirects. A missing canonical is reported as missing evidence rather than automatically labeled a search-engine error.
+With `--check-canonical`, HTML responses are inspected for a canonical link. At most 2 MiB of HTML is read per page. The comparison is between the resolved canonical URL and the final URL after redirects. A missing canonical is reported as missing evidence rather than automatically labeled a search-engine error.
 
 ## Sitemap indexes
 
